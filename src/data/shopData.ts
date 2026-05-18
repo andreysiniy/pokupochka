@@ -1,0 +1,148 @@
+import type { Category, Product } from "../types";
+
+export const categories: Category[] = [
+  { key: "vegetables", label: "Овощи", color: "#eaf6e8" },
+  { key: "fruits", label: "Фрукты", color: "#fff1e0" },
+  { key: "milk", label: "Молочные", color: "#e8f3ff" },
+  { key: "bread", label: "Выпечка", color: "#fff2e3" },
+  { key: "grocery", label: "Бакалея", color: "#f2ecff" },
+  { key: "meat", label: "Мясо", color: "#ffecef" },
+  { key: "fish", label: "Рыба", color: "#e7f8ff" },
+  { key: "drinks", label: "Напитки", color: "#eefce8" },
+  { key: "frozen", label: "Заморозка", color: "#edf0ff" },
+  { key: "sweets", label: "Сладости", color: "#fff0f5" }
+];
+
+type ProductSeed = Omit<Product, "id" | "image">;
+
+const categoryImages: Record<string, string> = {
+  vegetables: "/images/products/001.webp",
+  fruits: "/images/products/011.webp",
+  milk: "/images/products/021.webp",
+  bread: "/images/products/031.webp",
+  grocery: "/images/products/041.webp",
+  meat: "/images/products/051.webp",
+  fish: "/images/products/061.webp",
+  drinks: "/images/products/071.webp",
+  frozen: "/images/products/081.webp",
+  sweets: "/images/products/091.webp"
+};
+
+const seeds: ProductSeed[] = [
+  { title: "Томаты сливка", category: "vegetables", price: 169, oldPrice: 219, rating: 4.8, unit: "500 г" },
+  { title: "Огурцы грунтовые", category: "vegetables", price: 149, oldPrice: 189, rating: 4.7, unit: "600 г" },
+  { title: "Салат романо", category: "vegetables", price: 119, oldPrice: 0, rating: 4.6, unit: "1 шт" },
+  { title: "Перец сладкий", category: "vegetables", price: 199, oldPrice: 239, rating: 4.7, unit: "400 г" },
+  { title: "Картофель молодой", category: "vegetables", price: 129, oldPrice: 159, rating: 4.5, unit: "1 кг" },
+  { title: "Брокколи", category: "vegetables", price: 209, oldPrice: 0, rating: 4.4, unit: "500 г" },
+  { title: "Морковь", category: "vegetables", price: 89, oldPrice: 0, rating: 4.6, unit: "1 кг" },
+  { title: "Лук репчатый", category: "vegetables", price: 79, oldPrice: 0, rating: 4.4, unit: "1 кг" },
+  { title: "Кабачки", category: "vegetables", price: 159, oldPrice: 199, rating: 4.5, unit: "700 г" },
+  { title: "Шампиньоны", category: "vegetables", price: 189, oldPrice: 229, rating: 4.7, unit: "400 г" },
+
+  { title: "Яблоки Гала", category: "fruits", price: 229, oldPrice: 259, rating: 4.9, unit: "1 кг" },
+  { title: "Клубника свежая", category: "fruits", price: 329, oldPrice: 399, rating: 4.8, unit: "400 г" },
+  { title: "Бананы", category: "fruits", price: 169, oldPrice: 199, rating: 4.7, unit: "1 кг" },
+  { title: "Апельсины", category: "fruits", price: 219, oldPrice: 259, rating: 4.7, unit: "1 кг" },
+  { title: "Груши", category: "fruits", price: 249, oldPrice: 289, rating: 4.6, unit: "1 кг" },
+  { title: "Киви", category: "fruits", price: 199, oldPrice: 0, rating: 4.5, unit: "500 г" },
+  { title: "Голубика", category: "fruits", price: 349, oldPrice: 419, rating: 4.8, unit: "300 г" },
+  { title: "Манго", category: "fruits", price: 289, oldPrice: 339, rating: 4.6, unit: "1 шт" },
+  { title: "Виноград", category: "fruits", price: 279, oldPrice: 319, rating: 4.6, unit: "700 г" },
+  { title: "Ананас", category: "fruits", price: 359, oldPrice: 419, rating: 4.5, unit: "1 шт" },
+
+  { title: "Молоко 3.2%", category: "milk", price: 109, oldPrice: 0, rating: 4.7, unit: "900 мл" },
+  { title: "Сыр гауда", category: "milk", price: 239, oldPrice: 299, rating: 4.8, unit: "200 г" },
+  { title: "Йогурт греческий", category: "milk", price: 99, oldPrice: 119, rating: 4.6, unit: "180 г" },
+  { title: "Кефир 2.5%", category: "milk", price: 89, oldPrice: 0, rating: 4.5, unit: "900 мл" },
+  { title: "Творог 5%", category: "milk", price: 139, oldPrice: 169, rating: 4.7, unit: "300 г" },
+  { title: "Сметана 20%", category: "milk", price: 119, oldPrice: 0, rating: 4.5, unit: "300 г" },
+  { title: "Масло сливочное", category: "milk", price: 179, oldPrice: 219, rating: 4.8, unit: "180 г" },
+  { title: "Ряженка", category: "milk", price: 95, oldPrice: 0, rating: 4.4, unit: "500 мл" },
+  { title: "Моцарелла", category: "milk", price: 229, oldPrice: 269, rating: 4.7, unit: "125 г" },
+  { title: "Сливки 20%", category: "milk", price: 149, oldPrice: 179, rating: 4.6, unit: "500 мл" },
+
+  { title: "Хлеб ремесленный", category: "bread", price: 89, oldPrice: 0, rating: 4.5, unit: "450 г" },
+  { title: "Багет французский", category: "bread", price: 99, oldPrice: 0, rating: 4.4, unit: "280 г" },
+  { title: "Круассан", category: "bread", price: 79, oldPrice: 99, rating: 4.6, unit: "2 шт" },
+  { title: "Булочка с маком", category: "bread", price: 59, oldPrice: 0, rating: 4.3, unit: "1 шт" },
+  { title: "Лаваш армянский", category: "bread", price: 69, oldPrice: 0, rating: 4.4, unit: "2 листа" },
+  { title: "Чиабатта", category: "bread", price: 109, oldPrice: 139, rating: 4.5, unit: "320 г" },
+  { title: "Хлеб цельнозерновой", category: "bread", price: 119, oldPrice: 149, rating: 4.7, unit: "400 г" },
+  { title: "Пита", category: "bread", price: 89, oldPrice: 0, rating: 4.2, unit: "4 шт" },
+  { title: "Пончики", category: "bread", price: 149, oldPrice: 189, rating: 4.6, unit: "4 шт" },
+  { title: "Слойка с сыром", category: "bread", price: 99, oldPrice: 129, rating: 4.4, unit: "2 шт" },
+
+  { title: "Паста фузилли", category: "grocery", price: 119, oldPrice: 159, rating: 4.4, unit: "500 г" },
+  { title: "Рис жасмин", category: "grocery", price: 139, oldPrice: 169, rating: 4.5, unit: "900 г" },
+  { title: "Гречка", category: "grocery", price: 129, oldPrice: 0, rating: 4.7, unit: "800 г" },
+  { title: "Оливковое масло", category: "grocery", price: 499, oldPrice: 599, rating: 4.8, unit: "500 мл" },
+  { title: "Соус томатный", category: "grocery", price: 109, oldPrice: 139, rating: 4.3, unit: "350 г" },
+  { title: "Тунец консервированный", category: "grocery", price: 179, oldPrice: 219, rating: 4.6, unit: "185 г" },
+  { title: "Кукуруза консервированная", category: "grocery", price: 89, oldPrice: 109, rating: 4.4, unit: "340 г" },
+  { title: "Мука пшеничная", category: "grocery", price: 119, oldPrice: 0, rating: 4.5, unit: "1 кг" },
+  { title: "Соль морская", category: "grocery", price: 79, oldPrice: 0, rating: 4.4, unit: "500 г" },
+  { title: "Чай черный", category: "grocery", price: 159, oldPrice: 199, rating: 4.6, unit: "100 пак." },
+
+  { title: "Филе индейки", category: "meat", price: 449, oldPrice: 529, rating: 4.9, unit: "600 г" },
+  { title: "Фарш говяжий", category: "meat", price: 389, oldPrice: 459, rating: 4.7, unit: "500 г" },
+  { title: "Куриная грудка", category: "meat", price: 329, oldPrice: 389, rating: 4.8, unit: "700 г" },
+  { title: "Свинина шея", category: "meat", price: 469, oldPrice: 549, rating: 4.6, unit: "800 г" },
+  { title: "Колбаса докторская", category: "meat", price: 279, oldPrice: 339, rating: 4.4, unit: "500 г" },
+  { title: "Бекон сырокопченый", category: "meat", price: 259, oldPrice: 319, rating: 4.5, unit: "200 г" },
+  { title: "Котлеты домашние", category: "meat", price: 349, oldPrice: 409, rating: 4.6, unit: "6 шт" },
+  { title: "Сосиски молочные", category: "meat", price: 229, oldPrice: 289, rating: 4.3, unit: "450 г" },
+  { title: "Стейк рибай", category: "meat", price: 799, oldPrice: 949, rating: 4.9, unit: "350 г" },
+  { title: "Куриные крылья", category: "meat", price: 269, oldPrice: 319, rating: 4.5, unit: "900 г" },
+
+  { title: "Филе лосося", category: "fish", price: 549, oldPrice: 620, rating: 4.9, unit: "350 г" },
+  { title: "Треска охлажденная", category: "fish", price: 439, oldPrice: 499, rating: 4.6, unit: "500 г" },
+  { title: "Скумбрия", category: "fish", price: 319, oldPrice: 379, rating: 4.5, unit: "1 шт" },
+  { title: "Креветки 31/40", category: "fish", price: 679, oldPrice: 749, rating: 4.8, unit: "500 г" },
+  { title: "Кальмар кольца", category: "fish", price: 349, oldPrice: 419, rating: 4.4, unit: "400 г" },
+  { title: "Форель стейк", category: "fish", price: 629, oldPrice: 699, rating: 4.7, unit: "300 г" },
+  { title: "Сельдь филе", category: "fish", price: 219, oldPrice: 259, rating: 4.3, unit: "250 г" },
+  { title: "Крабовые палочки", category: "fish", price: 149, oldPrice: 189, rating: 4.2, unit: "200 г" },
+  { title: "Икра мойвы", category: "fish", price: 189, oldPrice: 229, rating: 4.4, unit: "180 г" },
+  { title: "Мидии", category: "fish", price: 379, oldPrice: 449, rating: 4.5, unit: "450 г" },
+
+  { title: "Апельсиновый сок", category: "drinks", price: 159, oldPrice: 0, rating: 4.6, unit: "1 л" },
+  { title: "Минеральная вода", category: "drinks", price: 69, oldPrice: 0, rating: 4.5, unit: "1.5 л" },
+  { title: "Кола без сахара", category: "drinks", price: 119, oldPrice: 149, rating: 4.3, unit: "1 л" },
+  { title: "Яблочный сок", category: "drinks", price: 149, oldPrice: 179, rating: 4.5, unit: "1 л" },
+  { title: "Морс клюквенный", category: "drinks", price: 139, oldPrice: 169, rating: 4.4, unit: "900 мл" },
+  { title: "Холодный чай", category: "drinks", price: 119, oldPrice: 0, rating: 4.2, unit: "0.5 л" },
+  { title: "Лимонад", category: "drinks", price: 109, oldPrice: 0, rating: 4.3, unit: "1 л" },
+  { title: "Кофе латте", category: "drinks", price: 169, oldPrice: 209, rating: 4.6, unit: "250 мл" },
+  { title: "Какао", category: "drinks", price: 149, oldPrice: 0, rating: 4.4, unit: "330 мл" },
+  { title: "Энергетик", category: "drinks", price: 129, oldPrice: 159, rating: 4.1, unit: "450 мл" },
+
+  { title: "Пельмени домашние", category: "frozen", price: 279, oldPrice: 339, rating: 4.6, unit: "700 г" },
+  { title: "Вареники с вишней", category: "frozen", price: 239, oldPrice: 289, rating: 4.5, unit: "600 г" },
+  { title: "Овощная смесь", category: "frozen", price: 179, oldPrice: 219, rating: 4.4, unit: "400 г" },
+  { title: "Брокколи замороженная", category: "frozen", price: 169, oldPrice: 0, rating: 4.3, unit: "400 г" },
+  { title: "Наггетсы", category: "frozen", price: 229, oldPrice: 279, rating: 4.4, unit: "500 г" },
+  { title: "Пицца пепперони", category: "frozen", price: 299, oldPrice: 349, rating: 4.5, unit: "430 г" },
+  { title: "Мороженое пломбир", category: "frozen", price: 129, oldPrice: 159, rating: 4.7, unit: "450 г" },
+  { title: "Блины с мясом", category: "frozen", price: 259, oldPrice: 309, rating: 4.5, unit: "500 г" },
+  { title: "Котлеты рыбные", category: "frozen", price: 249, oldPrice: 299, rating: 4.3, unit: "480 г" },
+  { title: "Картофель фри", category: "frozen", price: 169, oldPrice: 199, rating: 4.4, unit: "700 г" },
+
+  { title: "Эклер ванильный", category: "sweets", price: 179, oldPrice: 229, rating: 4.7, unit: "4 шт" },
+  { title: "Шоколад молочный", category: "sweets", price: 109, oldPrice: 139, rating: 4.6, unit: "90 г" },
+  { title: "Печенье овсяное", category: "sweets", price: 119, oldPrice: 0, rating: 4.4, unit: "250 г" },
+  { title: "Торт медовик", category: "sweets", price: 359, oldPrice: 419, rating: 4.8, unit: "600 г" },
+  { title: "Зефир", category: "sweets", price: 149, oldPrice: 179, rating: 4.4, unit: "300 г" },
+  { title: "Мармелад", category: "sweets", price: 129, oldPrice: 0, rating: 4.3, unit: "250 г" },
+  { title: "Чизкейк", category: "sweets", price: 289, oldPrice: 339, rating: 4.7, unit: "450 г" },
+  { title: "Маффины", category: "sweets", price: 159, oldPrice: 199, rating: 4.5, unit: "4 шт" },
+  { title: "Брауни", category: "sweets", price: 189, oldPrice: 229, rating: 4.6, unit: "2 шт" },
+  { title: "Мед натуральный", category: "sweets", price: 319, oldPrice: 379, rating: 4.7, unit: "400 г" }
+];
+
+export const products: Product[] = seeds.map((item, index) => ({
+  id: index + 1,
+  ...item,
+  image: categoryImages[item.category] ?? "/images/products/001.webp",
+  stock: index % 9 === 0 ? 0 : (index % 6) + 3
+}));
