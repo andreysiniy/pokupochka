@@ -118,34 +118,69 @@ button.active {
 
 
 .hero {
+  position: relative;
   margin-top: 14px;
   border-radius: 18px;
   overflow: hidden;
   border: 1px solid var(--line);
   display: grid;
   grid-template-columns: 1.2fr 1fr;
+  height: 320px;
   background: #fff;
 }
 
 .hero-visual {
   background: #c5ead9;
-  min-height: 280px;
+  min-height: 320px;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-visual::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("/placeholders/back.svg") center / cover no-repeat;
+  opacity: 0.25;
+  pointer-events: none;
+  z-index: 2;
 }
 
 .hero-image {
   display: block;
   width: 100%;
   height: 100%;
-  min-height: 280px;
+  min-height: 320px;
   object-fit: cover;
+  transform: scaleX(-1);
+  position: relative;
+  z-index: 1;
 }
 
 .hero-copy {
-  padding: 24px;
+  padding: 12px 18px;
   color: var(--ink);
-  background:
-    linear-gradient(120deg, rgba(22, 105, 55, 0.94), rgba(27, 122, 66, 0.9)),
-    repeating-linear-gradient(-50deg, rgba(255, 255, 255, 0.05) 0 8px, rgba(255, 255, 255, 0) 8px 16px);
+  background: #c5ead9;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.hero-copy::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("/placeholders/back.svg") center / cover no-repeat;
+  opacity: 0.25;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.hero-copy > * {
+  position: relative;
+  z-index: 2;
 }
 
 .hero-copy h1 {
@@ -155,9 +190,38 @@ button.active {
 }
 
 .hero-copy p {
-  margin: 0 0 16px;
+  margin: 0 0 8px;
   max-width: 720px;
-  color: #dff4e6;
+  color: var(--muted);
+}
+
+.hero-subscribe {
+  width: 420px;
+  max-width: 100%;
+  margin: 0;
+  align-self: flex-start;
+}
+
+.hero-subscribe-field {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.hero-subscribe input {
+  background: #fff;
+  width: 100%;
+  padding-right: 148px;
+  min-width: 0;
+}
+
+.hero-subscribe-field button {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  white-space: nowrap;
+  padding: 7px 12px;
 }
 
 .slider-block {
@@ -358,9 +422,87 @@ button.active {
 
 .footer {
   margin-top: 18px;
-  padding: 14px;
-  text-align: center;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  padding: 18px 14px 14px;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.footer-col {
+  display: grid;
+  gap: 8px;
+}
+
+.footer-col h3 {
+  margin: 0;
+  font-size: 1rem;
+  min-height: 42px;
+  display: flex;
+  align-items: center;
+}
+
+.footer-title-logo {
+  width: 210px;
+  max-height: 42px;
+  height: auto;
+  display: block;
+  margin-left: -8px;
+}
+
+.footer-logo-link {
+  display: inline-flex;
+}
+
+.footer-col-brand .footer-link {
+  margin-left: 12px;
+}
+
+.footer-link {
+  margin: 0;
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.footer-link:hover {
+  color: var(--brand);
+}
+
+.footer-link-with-icon {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.footer-icon {
+  width: 18px;
+  height: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--brand);
+  flex: 0 0 auto;
+}
+
+.footer-icon svg {
+  display: block;
+}
+
+.footer-icon img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.footer-copy {
+  margin: 14px 0 0;
+  padding-top: 10px;
   border-top: 1px solid var(--line);
+  text-align: center;
   color: var(--muted);
 }
 
@@ -612,7 +754,10 @@ input, textarea {
 }
 
 @media (max-width: 1000px) {
-  .hero { grid-template-columns: 1fr; }
+  .hero {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
   .categories { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .jobs-grid { grid-template-columns: 1fr; }
@@ -626,4 +771,5 @@ input, textarea {
   .categories { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .job-layout { grid-template-columns: 1fr; }
   .address-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; }
 }

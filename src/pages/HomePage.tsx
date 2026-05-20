@@ -8,11 +8,17 @@ export function HomePage() {
     <>
       <section className="hero">
         <div className="hero-visual">
-          <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1600&q=80" alt="Fresh groceries" className="hero-image" />
+          <img src="/images/background/image.png" alt="Фон карточки" className="hero-image" />
         </div>
         <div className="hero-copy">
-          <h1>Свежие продукты с доставкой за 60 минут</h1>
-          <p>Сезонные предложения, аккуратная упаковка и быстрая доставка по городу.</p>
+          <h1>Не пропустите акции</h1>
+          <p>Подпишитесь на уведомления о свежих акциях по почте.</p>
+          <form className="hero-subscribe" onSubmit={(event) => event.preventDefault()}>
+            <div className="hero-subscribe-field">
+              <input type="email" placeholder="Ваш email" aria-label="Email для подписки" required />
+              <button type="submit" className="solid">Подписаться</button>
+            </div>
+          </form>
         </div>
       </section>
 

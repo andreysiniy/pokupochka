@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useShop } from "../context/ShopContext";
 
 const links = [
@@ -14,7 +14,9 @@ export function NavBar() {
 
   return (
     <header className="top-bar">
-      <div className="brand"><img src="/placeholders/logo.svg" alt="Покупочка" className="logo-crop" /></div>
+      <Link to="/" className="brand" aria-label="На главную">
+        <img src="/placeholders/logo.svg" alt="Покупочка" className="logo-crop" />
+      </Link>
       <nav>
         {links.map((link) => (
           <NavLink key={link.to} to={link.to} className={({ isActive }) => `nav-link ${isActive ? "active" : ""}`}>

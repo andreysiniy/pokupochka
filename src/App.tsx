@@ -1,5 +1,6 @@
 import { lazy, Suspense } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
+import { Footer } from "./components/Footer";
 import { NavBar } from "./components/NavBar";
 import { CartModal } from "./components/modals/CartModal";
 import { ProductModal } from "./components/modals/ProductModal";
@@ -30,7 +31,7 @@ export default function App() {
         </Routes>
       </Suspense>
 
-      <footer className="footer">© Покупочка</footer>
+      <Footer />
 
       <ProductModal />
       <CartModal />
