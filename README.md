@@ -103,11 +103,83 @@ npm run preview
 
 Примечание: форма подписки на email в hero-блоке сейчас UI-only и не пишет данные в LocalStorage.
 
-## Структура
+## Структура проекта
 
-- `src/pages` — страницы
-- `src/components` — UI-компоненты
-- `src/components/modals` — модальные окна
-- `src/context/ShopContext.tsx` — глобальное состояние магазина
-- `src/data/shopData.ts` — категории и товары
-- `public/images/products` — локальные изображения категорий
+```text
+gilka/
+├─ public/
+│  ├─ images/
+│  │  ├─ background/
+│  │  │  └─ image.png                  # фоновая картинка hero-блока
+│  │  └─ products/                     # изображения товаров/категорий
+│  └─ placeholders/
+│     ├─ logo.svg                      # логотип (nav + footer)
+│     ├─ back.svg                      # паттерн для hero
+│     └─ *.svg                         # прочие заглушки
+├─ src/
+│  ├─ assets/
+│  │  └─ footer-icons/
+│  │     ├─ vk.svg
+│  │     ├─ telegram.svg
+│  │     ├─ youtube.svg
+│  │     ├─ office.svg
+│  │     ├─ phone.svg
+│  │     └─ email.svg                  # SVG-иконки футера
+│  ├─ components/
+│  │  ├─ NavBar.tsx                    # верхняя навигация + кнопка корзины
+│  │  ├─ Footer.tsx                    # 3-колоночный футер
+│  │  ├─ CategorySlider.tsx            # слайдер категорий
+│  │  ├─ ProductCard.tsx               # карточка товара
+│  │  ├─ ProductsGrid.tsx              # сетка карточек
+│  │  └─ modals/
+│  │     ├─ ProductModal.tsx           # модалка товара
+│  │     ├─ CartModal.tsx              # модалка корзины
+│  │     └─ JobQuickModal.tsx          # быстрый отклик на вакансию
+│  ├─ context/
+│  │  └─ ShopContext.tsx               # глобальный state: cart, favorites, modal state
+│  ├─ data/
+│  │  ├─ shopData.ts                   # мок-данные товаров и категорий
+│  │  └─ footerData.ts                 # конфиг ссылок и контактов футера
+│  ├─ pages/
+│  │  ├─ HomePage.tsx                  # главная
+│  │  ├─ CatalogPage.tsx               # каталог
+│  │  ├─ SalePage.tsx                  # акции
+│  │  ├─ WishlistPage.tsx              # избранное
+│  │  ├─ JobsPage.tsx                  # вакансии
+│  │  ├─ CheckoutPage.tsx              # оформление заказа
+│  │  └─ NotFoundPage.tsx              # 404
+│  ├─ App.tsx                          # маршруты, общий layout, модалки
+│  ├─ main.tsx                         # точка входа (BrowserRouter + ShopProvider)
+│  ├─ styles.css                       # глобальные стили
+│  ├─ types.ts                         # общие типы приложения
+│  └─ vite-env.d.ts                    # типы для Vite и импорта SVG
+├─ index.html                          # корневой HTML для Vite
+├─ vite.config.js                      # конфигурация Vite
+├─ tsconfig.json                       # конфигурация TypeScript
+└─ README.md
+```
+
+### Как устроено приложение
+
+- `main.tsx` поднимает `BrowserRouter` и `ShopProvider`, затем рендерит `App`.
+- `App.tsx` содержит роутинг (`/`, `/catalog`, `/sale`, `/wishlist`, `/jobs`, `/checkout`, `*`) и общие элементы layout: `NavBar`, `Footer`, глобальные модалки.
+- `pages/*` отвечают за контент конкретных экранов и собирают UI из переиспользуемых компонентов.
+- `components/*` — независимые UI-блоки (карточки, сетки, слайдер, шапка, футер).
+- `components/modals/*` — оверлеи поверх страниц, управляются через состояние в `ShopContext`.
+
+### Данные и состояние
+
+- `data/shopData.ts` — источник каталога (товары, цены, скидки, наличие, категории).
+- `data/footerData.ts` — конфигурация для футера (ссылки, контакты).
+- `context/ShopContext.tsx` — единый state слоя магазина:
+  - `favoriteIds`
+  - `cart`
+  - `openedProduct`
+  - `cartOpen`
+  - методы изменения (`toggleFavorite`, `addToCart`, `decreaseCartItem`, `clearCart`, `clearFavorites`, и т.д.).
+
+### Стили и ассеты
+
+- `styles.css` содержит общую дизайн-систему на CSS-переменных (`--bg`, `--brand`, `--line` и т.д.), responsive-брейкпоинты и стили страниц/компонентов.
+- `public/*` используется для статических ресурсов по прямым URL (`/placeholders/...`, `/images/...`).
+- `src/assets/footer-icons/*` — SVG-иконки, импортируемые в React-компоненты (через `vite-env.d.ts`).
