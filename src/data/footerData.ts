@@ -16,8 +16,8 @@ export type FooterContactItem = {
 };
 
 export const footerNavLinks: FooterNavLink[] = [
-  { label: "Каталог", to: "/catalog" },
-  { label: "Акции", to: "/sale" },
+  { label: "Доставка", to: "/delivery" },
+  { label: "О нас", to: "/about" },
   { label: "Вакансии", to: "/jobs" },
 ];
 

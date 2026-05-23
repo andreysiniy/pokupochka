@@ -5,7 +5,10 @@ const links = [
   { to: "/", label: "Главная" },
   { to: "/catalog", label: "Каталог" },
   { to: "/sale", label: "Акции" },
-  { to: "/wishlist", label: "Избранное" }
+  { to: "/wishlist", label: "Избранное" },
+  { to: "/delivery", label: "Доставка" },
+  { to: "/about", label: "О нас" },
+  { to: "/loyalty", label: "Скидочная карта" }
 ];
 
 export function NavBar() {

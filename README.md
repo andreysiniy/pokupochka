@@ -77,6 +77,32 @@ npm run preview
   - итоговая сумма
 - После подтверждения заказа: корзина очищается, имя и телефон сохраняются
 
+### `/delivery` — Доставка и оплата
+
+- Условия доставки по зоне
+- Стоимость и порог бесплатной доставки
+- Время доставки и способы оплаты
+- Блок про возврат и замену
+
+### `/about` — О нас
+
+- Кратко о сервисе Покупочка
+- Блоки про качество, скорость и программу лояльности
+
+### `/loyalty/login` — Вход в скидочную карту
+
+- Вход по номеру телефона
+- Маска и валидация телефона: `+7 (XXX) XXX-XX-XX`
+- После успешного входа создается локальный профиль карты
+
+### `/loyalty` — Баллы скидочной карты
+
+- Просмотр уровня карты (Silver/Gold)
+- Текущий баланс баллов
+- Прогресс до уровня Gold
+- История начислений/списаний баллов (localStorage)
+- Кнопки перехода в каталог и выхода из карты
+
 ### `/home` — Redirect
 
 - Редирект на `/` (совместимость со старыми ссылками)
@@ -100,6 +126,8 @@ npm run preview
 - `shop.cart` — массив `{ id: number, qty: number }[]`
 - `shop.addresses` — массив сохраненных адресов: `id`, `label`, `city`, `street`, `house`, `apartment`, `floor`, `entrance`
 - `shop.checkoutProfile` — объект профиля: `name: string`, `phoneDigits: string` (11 цифр, начинается с `7`)
+- `shop.loyaltyProfile` — профиль скидочной карты: `phoneDigits`, `points`, `tier`
+- `shop.loyaltyHistory.<phoneDigits>` — история операций по баллам (`title`, `delta`, `createdAt`)
 
 Примечание: форма подписки на email в hero-блоке сейчас UI-only и не пишет данные в LocalStorage.
 
@@ -147,6 +175,10 @@ gilka/
 │  │  ├─ WishlistPage.tsx              # избранное
 │  │  ├─ JobsPage.tsx                  # вакансии
 │  │  ├─ CheckoutPage.tsx              # оформление заказа
+│  │  ├─ DeliveryPage.tsx              # доставка и оплата
+│  │  ├─ AboutPage.tsx                 # о сервисе
+│  │  ├─ LoyaltyLoginPage.tsx           # вход в скидочную карту
+│  │  ├─ LoyaltyCardPage.tsx            # просмотр баллов и уровня карты
 │  │  └─ NotFoundPage.tsx              # 404
 │  ├─ App.tsx                          # маршруты, общий layout, модалки
 │  ├─ main.tsx                         # точка входа (BrowserRouter + ShopProvider)
@@ -162,7 +194,7 @@ gilka/
 ### Как устроено приложение
 
 - `main.tsx` поднимает `BrowserRouter` и `ShopProvider`, затем рендерит `App`.
-- `App.tsx` содержит роутинг (`/`, `/catalog`, `/sale`, `/wishlist`, `/jobs`, `/checkout`, `*`) и общие элементы layout: `NavBar`, `Footer`, глобальные модалки.
+- `App.tsx` содержит роутинг (`/`, `/catalog`, `/sale`, `/wishlist`, `/jobs`, `/checkout`, `/delivery`, `/about`, `/loyalty/login`, `/loyalty`, `*`) и общие элементы layout: `NavBar`, `Footer`, глобальные модалки.
 - `pages/*` отвечают за контент конкретных экранов и собирают UI из переиспользуемых компонентов.
 - `components/*` — независимые UI-блоки (карточки, сетки, слайдер, шапка, футер).
 - `components/modals/*` — оверлеи поверх страниц, управляются через состояние в `ShopContext`.

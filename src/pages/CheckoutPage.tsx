@@ -3,6 +3,8 @@ import { useShop } from "../context/ShopContext";
 
 const ADDRESSES_KEY = "shop.addresses";
 const PROFILE_KEY = "shop.checkoutProfile";
+const LOYALTY_PROFILE_KEY = "shop.loyaltyProfile";
+const LOYALTY_HISTORY_KEY = "shop.loyaltyHistory";
 
 type SavedAddress = {
   id: string;
@@ -18,6 +20,19 @@ type SavedAddress = {
 type SavedProfile = {
   name: string;
   phoneDigits: string;
+};
+
+type LoyaltyProfile = {
+  phoneDigits: string;
+  points: number;
+  tier: "Silver" | "Gold";
+};
+
+type LoyaltyHistoryItem = {
+  id: string;
+  title: string;
+  delta: number;
+  createdAt: string;
 };
 
 function readAddresses(): SavedAddress[] {
@@ -151,6 +166,35 @@ export function CheckoutPage() {
     if (!name.trim() || !isPhoneComplete(phoneDigits) || !city.trim() || !street.trim() || !house.trim() || cart.length === 0) return;
     if (typeof window !== "undefined") {
       window.localStorage.setItem(PROFILE_KEY, JSON.stringify({ name: name.trim(), phoneDigits }));
+
+      const rawLoyalty = window.localStorage.getItem(LOYALTY_PROFILE_KEY);
+      if (rawLoyalty) {
+        try {
+          const loyalty = JSON.parse(rawLoyalty) as LoyaltyProfile;
+          if (loyalty.phoneDigits === phoneDigits) {
+            const earned = Math.max(10, Math.floor(total * 0.03));
+            const nextPoints = loyalty.points + earned;
+            const nextTier: "Silver" | "Gold" = nextPoints >= 3000 ? "Gold" : "Silver";
+            window.localStorage.setItem(
+              LOYALTY_PROFILE_KEY,
+              JSON.stringify({ ...loyalty, points: nextPoints, tier: nextTier })
+            );
+
+            const historyKey = `${LOYALTY_HISTORY_KEY}.${phoneDigits}`;
+            const rawHistory = window.localStorage.getItem(historyKey);
+            const history = rawHistory ? (JSON.parse(rawHistory) as LoyaltyHistoryItem[]) : [];
+            const nextItem: LoyaltyHistoryItem = {
+              id: `h-${Date.now()}`,
+              title: `Покупка на ${money(total)}`,
+              delta: earned,
+              createdAt: new Date().toLocaleDateString("ru-RU")
+            };
+            window.localStorage.setItem(historyKey, JSON.stringify([nextItem, ...history].slice(0, 30)));
+          }
+        } catch {
+          // ignore broken loyalty profile
+        }
+      }
     }
     clearCart();
     setComment("");
