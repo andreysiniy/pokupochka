@@ -1,6 +1,69 @@
-# Покупочка — frontend витрина магазина
+# Покупочка — Web + Mobile
 
-React + TypeScript приложение интернет-магазина с каталогом, корзиной, избранным, оформлением заказа и страницей вакансий.
+В репозитории теперь две версии приложения:
+
+- Web (React + Vite) — текущий сайт в корне проекта.
+- Mobile (React Native + Expo) — новое мобильное приложение в папке `mobile-app`.
+
+## Mobile (React Native)
+
+Путь: `mobile-app`
+
+### Стек
+
+- Expo + React Native + TypeScript
+- React Navigation (tabs + stack)
+- AsyncStorage для хранения данных на устройстве
+
+### Запуск
+
+```bash
+cd mobile-app
+npm install
+npm run start
+```
+
+Дополнительно:
+
+```bash
+npm run android
+npm run ios
+```
+
+### Что реализовано в mobile-app
+
+- Экраны: Главная, Каталог, Акции, Избранное, Доставка, О нас, Вакансии, Checkout.
+- Скидочная карта:
+  - `LoyaltyLogin` (вход по телефону с валидацией)
+  - `LoyaltyCard` (баллы/уровень)
+- Локальное хранение на устройстве (AsyncStorage):
+  - избранное
+  - корзина
+  - сохраненные адреса
+  - профиль checkout (имя + телефон)
+  - профиль скидочной карты
+
+### Ассеты для mobile-app
+
+- Категорийные изображения перенесены из web-версии в:
+  - `mobile-app/assets/products/*.png`
+- Hero-изображение перенесено в:
+  - `mobile-app/assets/hero.png`
+- Иконки вкладок реализованы через `@expo/vector-icons` (Ionicons)
+
+### UI-система в mobile-app
+
+- Общая тема цветов и типографики: `mobile-app/src/theme.ts`
+- Переиспользуемые UI-примитивы:
+  - `mobile-app/src/components/ui/Card.tsx`
+  - `mobile-app/src/components/ui/AppButton.tsx`
+  - `mobile-app/src/components/ui/AppInput.tsx`
+  - `mobile-app/src/components/ui/Screen.tsx`
+- Ключевые экраны и списки переведены на единый стиль карточек/кнопок/отступов.
+
+## Web (React + Vite)
+
+Ниже остается описание веб-версии.
 
 ## Стек
 
